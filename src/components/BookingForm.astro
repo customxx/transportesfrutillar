@@ -1,0 +1,352 @@
+---
+interface Props {
+  type: 'transporte' | 'tour';
+  whatsappNumber: string;
+}
+
+const { type, whatsappNumber } = Astro.props;
+const isTransport = type === 'transporte';
+---
+
+<div class="booking-card" id="reservar">
+  <div class="booking-header">
+    <div class="booking-icon">
+      {isTransport ? (
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+      ) : (
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+      )}
+    </div>
+    <h2>{isTransport ? 'Reserva tu Viaje' : 'Reserva tu Tour'}</h2>
+    <p>{isTransport ? 'Completa los datos y te contactamos por WhatsApp' : 'Elige tu tour y agenda con nosotros'}</p>
+  </div>
+
+  <form class="booking-form" id={`booking-form-${type}`} data-type={type} data-phone={whatsappNumber}>
+    <div class="form-group">
+      <label for={`origin-${type}`}>
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><circle cx="12" cy="12" r="10"/></svg>
+        {isTransport ? 'Origen' : 'Punto de encuentro'}
+      </label>
+      <input
+        type="text"
+        id={`origin-${type}`}
+        name="origin"
+        class="address-input"
+        placeholder={isTransport ? '¿Desde dónde sales?' : '¿Dónde te recogemos?'}
+        required
+        autocomplete="off"
+      />
+    </div>
+
+    {isTransport && (
+      <div class="form-group">
+        <label for={`destination-${type}`}>
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+          Destino
+        </label>
+        <input
+          type="text"
+          id={`destination-${type}`}
+          name="destination"
+          class="address-input"
+          placeholder="¿A dónde vas?"
+          required
+          autocomplete="off"
+        />
+      </div>
+    )}
+
+    {!isTransport && (
+      <div class="form-group">
+        <label for={`tour-select`}>
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+          Tour
+        </label>
+        <select id="tour-select" name="tour" required>
+          <option value="">Selecciona un tour</option>
+          <option value="Frutillar Bajo - Centro Histórico">Frutillar Bajo - Centro Histórico</option>
+          <option value="Costanera y Lago Llanquihue">Costanera y Lago Llanquihue</option>
+          <option value="Teatro del Lago y alrededores">Teatro del Lago y alrededores</option>
+          <option value="Frutillar Alto - Miradores">Frutillar Alto - Miradores</option>
+          <option value="Tour Completo Frutillar">Tour Completo Frutillar</option>
+        </select>
+      </div>
+    )}
+
+    <div class="form-row">
+      <div class="form-group">
+        <label for={`date-${type}`}>
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/></svg>
+          Fecha
+        </label>
+        <input type="date" id={`date-${type}`} name="date" required />
+      </div>
+      <div class="form-group">
+        <label for={`time-${type}`}>
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          Hora
+        </label>
+        <input type="time" id={`time-${type}`} name="time" required />
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for={`passengers-${type}`}>
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        Pasajeros
+      </label>
+      <select id={`passengers-${type}`} name="passengers" required>
+        <option value="">¿Cuántos viajan?</option>
+        <option value="1">1 pasajero</option>
+        <option value="2">2 pasajeros</option>
+        <option value="3">3 pasajeros</option>
+        <option value="4">4 pasajeros</option>
+        <option value="5">5 pasajeros</option>
+        <option value="6">6 pasajeros</option>
+        <option value="7+">7 o más</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for={`name-${type}`}>
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        Nombre
+      </label>
+      <input type="text" id={`name-${type}`} name="name" placeholder="Tu nombre" required />
+    </div>
+
+    <button type="submit" class="btn-submit">
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+      Enviar por WhatsApp
+    </button>
+  </form>
+</div>
+
+<script>
+  function initForms() {
+    document.querySelectorAll<HTMLFormElement>('.booking-form').forEach((form) => {
+      form.addEventListener('submit', (e) => {
+        e.preventDefault();
+
+        const formData = new FormData(form);
+        const type = form.dataset.type;
+        const phone = form.dataset.phone;
+
+        const name = formData.get('name') as string;
+        const origin = formData.get('origin') as string;
+        const date = formData.get('date') as string;
+        const time = formData.get('time') as string;
+        const passengers = formData.get('passengers') as string;
+
+        let message = '';
+
+        if (type === 'transporte') {
+          const destination = formData.get('destination') as string;
+          message = `Hola! Quiero reservar un *transporte*:\n\n`
+            + `*Nombre:* ${name}\n`
+            + `*Desde:* ${origin}\n`
+            + `*Hasta:* ${destination}\n`
+            + `*Fecha:* ${date}\n`
+            + `*Hora:* ${time}\n`
+            + `*Pasajeros:* ${passengers}`;
+        } else {
+          const tour = formData.get('tour') as string;
+          message = `Hola! Quiero reservar un *tour*:\n\n`
+            + `*Nombre:* ${name}\n`
+            + `*Tour:* ${tour}\n`
+            + `*Punto de encuentro:* ${origin}\n`
+            + `*Fecha:* ${date}\n`
+            + `*Hora:* ${time}\n`
+            + `*Pasajeros:* ${passengers}`;
+        }
+
+        const url = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
+        window.open(url, '_blank');
+      });
+    });
+  }
+
+  function loadGoogleMaps() {
+    const apiKey = import.meta.env.PUBLIC_GOOGLE_MAPS_API_KEY;
+    if (!apiKey) return;
+
+    const script = document.createElement('script');
+    script.src = `https://maps.googleapis.com/maps/api/js?key=${apiKey}&libraries=places&callback=initAutocomplete`;
+    script.async = true;
+    script.defer = true;
+    document.head.appendChild(script);
+
+    (window as any).initAutocomplete = () => {
+      document.querySelectorAll<HTMLInputElement>('.address-input').forEach((input) => {
+        const autocomplete = new google.maps.places.Autocomplete(input, {
+          componentRestrictions: { country: 'cl' },
+          fields: ['formatted_address'],
+        });
+        autocomplete.addListener('place_changed', () => {
+          const place = autocomplete.getPlace();
+          if (place.formatted_address) {
+            input.value = place.formatted_address;
+          }
+        });
+      });
+    };
+  }
+
+  function setMinDates() {
+    const today = new Date().toISOString().split('T')[0];
+    document.querySelectorAll<HTMLInputElement>('input[type="date"]').forEach((input) => {
+      input.setAttribute('min', today);
+    });
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    initForms();
+    loadGoogleMaps();
+    setMinDates();
+  });
+
+  document.addEventListener('astro:after-swap', () => {
+    initForms();
+    loadGoogleMaps();
+    setMinDates();
+  });
+</script>
+
+<style>
+  .booking-card {
+    background: var(--color-white);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-xl);
+    overflow: hidden;
+    max-width: 520px;
+    width: 100%;
+  }
+
+  .booking-header {
+    background: linear-gradient(135deg, var(--color-primary), var(--color-primary-dark));
+    color: var(--color-white);
+    padding: 2rem;
+    text-align: center;
+  }
+
+  .booking-icon {
+    width: 48px;
+    height: 48px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1rem;
+  }
+
+  .booking-header h2 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 0.25rem;
+  }
+
+  .booking-header p {
+    font-size: 0.9rem;
+    opacity: 0.85;
+  }
+
+  .booking-form {
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+
+  .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+
+  .form-group label {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--color-gray-700);
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+  }
+
+  .form-group label svg {
+    color: var(--color-primary);
+    flex-shrink: 0;
+  }
+
+  .form-group input,
+  .form-group select {
+    padding: 0.75rem 1rem;
+    border: 1.5px solid var(--color-gray-300);
+    border-radius: var(--radius-sm);
+    font-size: 0.95rem;
+    font-family: inherit;
+    color: var(--color-dark);
+    background: var(--color-white);
+    transition: border-color 0.2s, box-shadow 0.2s;
+    width: 100%;
+  }
+
+  .form-group input:focus,
+  .form-group select:focus {
+    outline: none;
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 3px var(--color-primary-light);
+  }
+
+  .form-group input::placeholder {
+    color: var(--color-gray-500);
+  }
+
+  .btn-submit {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    width: 100%;
+    padding: 1rem;
+    background: var(--color-whatsapp);
+    color: var(--color-white);
+    border: none;
+    border-radius: var(--radius-sm);
+    font-size: 1.05rem;
+    font-weight: 600;
+    font-family: inherit;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.15s;
+    margin-top: 0.5rem;
+  }
+
+  .btn-submit:hover {
+    background: #1fb855;
+    transform: translateY(-1px);
+  }
+
+  .btn-submit:active {
+    transform: translateY(0);
+  }
+
+  @media (max-width: 480px) {
+    .form-row {
+      grid-template-columns: 1fr;
+    }
+
+    .booking-form {
+      padding: 1.5rem;
+    }
+
+    .booking-header {
+      padding: 1.5rem;
+    }
+  }
+</style>

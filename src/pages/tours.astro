@@ -1,0 +1,491 @@
+---
+import Layout from '../layouts/Layout.astro';
+import BookingForm from '../components/BookingForm.astro';
+
+const WHATSAPP = '56922444508';
+
+const tours = [
+  {
+    name: 'Frutillar Bajo - Centro Histórico',
+    duration: '2 horas',
+    description: 'Recorre las calles del pueblo original con su arquitectura colonial alemana, museos y casas patrimoniales.',
+    highlights: ['Museo Colonial Alemán', 'Casas patrimoniales', 'Iglesia Luterana'],
+    color: 'blue',
+  },
+  {
+    name: 'Costanera y Lago Llanquihue',
+    duration: '1.5 horas',
+    description: 'Paseo por la icónica costanera con vistas al volcán Osorno y el lago Llanquihue.',
+    highlights: ['Playa de Frutillar', 'Muelle histórico', 'Vista al Volcán Osorno'],
+    color: 'teal',
+  },
+  {
+    name: 'Teatro del Lago y alrededores',
+    duration: '2 horas',
+    description: 'Visita el emblemático Teatro del Lago y conoce la historia cultural de Frutillar.',
+    highlights: ['Teatro del Lago', 'Jardines costeros', 'Zona gastronómica'],
+    color: 'amber',
+  },
+  {
+    name: 'Frutillar Alto - Miradores',
+    duration: '1.5 horas',
+    description: 'Sube a los miradores de Frutillar Alto para disfrutar vistas panorámicas impresionantes.',
+    highlights: ['Mirador Volcán Osorno', 'Vista panorámica', 'Barrio Alto'],
+    color: 'green',
+  },
+  {
+    name: 'Tour Completo Frutillar',
+    duration: '4 horas',
+    description: 'El tour más completo: recorre Frutillar de punta a punta, combinando todos nuestros circuitos.',
+    highlights: ['Todo incluido', 'Paradas fotográficas', 'Guía personalizado'],
+    color: 'purple',
+  },
+];
+---
+
+<Layout title="Tours por Frutillar - Transportes Frutillar" description="Descubre Frutillar con nuestros tours guiados. Costanera, Teatro del Lago, miradores y más.">
+  <section class="tours-hero">
+    <div class="tours-hero-bg"></div>
+    <div class="tours-hero-content">
+      <span class="hero-badge">Descubre Frutillar</span>
+      <h1>Tours por la ciudad de <span class="highlight">Frutillar</span></h1>
+      <p>Conoce los rincones más hermosos de Frutillar con nuestros tours guiados. Volcán Osorno, Lago Llanquihue, arquitectura alemana y mucho más.</p>
+      <div class="tours-hero-gallery">
+        <img src="/fotos/tours-1.webp" alt="Tour por Frutillar - paisajes del sur de Chile" class="hero-photo" />
+        <img src="/fotos/tours-2.webp" alt="Tour por Frutillar - recorrido turístico" class="hero-photo" />
+      </div>
+      <a href="#reservar" class="hero-cta">
+        Reservar un tour
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" x2="19" y1="12" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </a>
+    </div>
+  </section>
+
+  <section class="tours-list">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Nuestros Tours</span>
+        <h2>Elige tu experiencia</h2>
+        <p>Cada tour está diseñado para mostrarte lo mejor de Frutillar</p>
+      </div>
+      <div class="tours-grid">
+        {tours.map((tour) => (
+          <div class={`tour-card tour-${tour.color}`}>
+            <div class="tour-badge">{tour.duration}</div>
+            <h3>{tour.name}</h3>
+            <p>{tour.description}</p>
+            <ul class="tour-highlights">
+              {tour.highlights.map((h) => (
+                <li>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                  {h}
+                </li>
+              ))}
+            </ul>
+            <a href="#reservar" class="tour-cta">Reservar este tour</a>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="booking-section">
+    <div class="container">
+      <div class="booking-layout">
+        <div class="booking-info">
+          <span class="section-tag">Reserva Fácil</span>
+          <h2>Agenda tu tour en segundos</h2>
+          <p>Completa el formulario y te enviaremos toda la información directamente a tu WhatsApp. Sin complicaciones.</p>
+          <div class="info-cards">
+            <div class="info-card">
+              <div class="info-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/></svg>
+              </div>
+              <div>
+                <strong>Disponibilidad diaria</strong>
+                <p>Tours disponibles todos los días del año</p>
+              </div>
+            </div>
+            <div class="info-card">
+              <div class="info-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+              </div>
+              <div>
+                <strong>Grupos pequeños</strong>
+                <p>Experiencia personalizada para cada grupo</p>
+              </div>
+            </div>
+            <div class="info-card">
+              <div class="info-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m16 10-4 4-4-4"/></svg>
+              </div>
+              <div>
+                <strong>Cancelación flexible</strong>
+                <p>Cancela hasta 24 horas antes sin costo</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="booking-form-wrapper">
+          <BookingForm type="tour" whatsappNumber={WHATSAPP} />
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .tours-hero {
+    position: relative;
+    padding: 10rem 1.5rem 5rem;
+    text-align: center;
+    overflow: hidden;
+  }
+
+  .tours-hero-bg {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, #fef3c7 0%, #fde68a 30%, #d1fae5 100%);
+    z-index: 0;
+  }
+
+  .tours-hero-bg::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 120px;
+    background: linear-gradient(to bottom, transparent, var(--color-white));
+  }
+
+  .tours-hero-content {
+    position: relative;
+    z-index: 1;
+    max-width: 700px;
+    margin: 0 auto;
+  }
+
+  .hero-badge {
+    display: inline-block;
+    background: rgba(255, 255, 255, 0.8);
+    color: #d97706;
+    padding: 0.35rem 1rem;
+    border-radius: 9999px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+  }
+
+  .tours-hero-content h1 {
+    font-size: 3rem;
+    font-weight: 800;
+    line-height: 1.15;
+    margin-bottom: 1rem;
+    color: var(--color-dark);
+  }
+
+  .highlight {
+    color: #d97706;
+  }
+
+  .tours-hero-content > p {
+    font-size: 1.15rem;
+    color: var(--color-gray-500);
+    line-height: 1.7;
+    margin-bottom: 2rem;
+  }
+
+  .tours-hero-gallery {
+    display: flex;
+    gap: 1.25rem;
+    justify-content: center;
+    margin-bottom: 2.5rem;
+  }
+
+  .hero-photo {
+    width: 280px;
+    height: 200px;
+    object-fit: cover;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-lg);
+    transition: transform 0.3s;
+  }
+
+  .hero-photo:first-child {
+    transform: rotate(-2deg);
+  }
+
+  .hero-photo:last-child {
+    transform: rotate(2deg);
+  }
+
+  .hero-photo:hover {
+    transform: rotate(0deg) scale(1.03);
+  }
+
+  .hero-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.85rem 2rem;
+    background: #d97706;
+    color: var(--color-white);
+    border-radius: 9999px;
+    font-weight: 600;
+    font-size: 1rem;
+    transition: background 0.2s, transform 0.15s;
+  }
+
+  .hero-cta:hover {
+    background: #b45309;
+    transform: translateY(-1px);
+  }
+
+  .tours-list {
+    padding: 5rem 0;
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+  }
+
+  .section-header {
+    text-align: center;
+    margin-bottom: 3.5rem;
+  }
+
+  .section-tag {
+    display: inline-block;
+    background: #fef3c7;
+    color: #d97706;
+    padding: 0.3rem 0.9rem;
+    border-radius: 9999px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 1rem;
+  }
+
+  .section-header h2 {
+    font-size: 2.25rem;
+    font-weight: 800;
+    margin-bottom: 0.75rem;
+  }
+
+  .section-header p {
+    font-size: 1.1rem;
+    color: var(--color-gray-500);
+  }
+
+  .tours-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .tour-card {
+    background: var(--color-white);
+    border: 1px solid var(--color-gray-100);
+    border-radius: var(--radius);
+    padding: 2rem;
+    position: relative;
+    transition: box-shadow 0.3s, transform 0.2s;
+  }
+
+  .tour-card:hover {
+    box-shadow: var(--shadow-lg);
+    transform: translateY(-4px);
+  }
+
+  .tour-badge {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    border-radius: 9999px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+  }
+
+  .tour-blue .tour-badge { background: var(--color-primary-light); color: var(--color-primary); }
+  .tour-teal .tour-badge { background: var(--color-accent-light); color: var(--color-accent); }
+  .tour-amber .tour-badge { background: #fef3c7; color: #d97706; }
+  .tour-green .tour-badge { background: #dcfce7; color: #16a34a; }
+  .tour-purple .tour-badge { background: #ede9fe; color: #7c3aed; }
+
+  .tour-card h3 {
+    font-size: 1.15rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+  }
+
+  .tour-card > p {
+    font-size: 0.9rem;
+    color: var(--color-gray-500);
+    line-height: 1.6;
+    margin-bottom: 1rem;
+  }
+
+  .tour-highlights {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .tour-highlights li {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.85rem;
+    color: var(--color-gray-700);
+  }
+
+  .tour-highlights svg {
+    color: var(--color-accent);
+    flex-shrink: 0;
+  }
+
+  .tour-cta {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.6rem 1.25rem;
+    border-radius: 9999px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    transition: all 0.2s;
+  }
+
+  .tour-blue .tour-cta { background: var(--color-primary-light); color: var(--color-primary); }
+  .tour-blue .tour-cta:hover { background: var(--color-primary); color: white; }
+  .tour-teal .tour-cta { background: var(--color-accent-light); color: var(--color-accent); }
+  .tour-teal .tour-cta:hover { background: var(--color-accent); color: white; }
+  .tour-amber .tour-cta { background: #fef3c7; color: #d97706; }
+  .tour-amber .tour-cta:hover { background: #d97706; color: white; }
+  .tour-green .tour-cta { background: #dcfce7; color: #16a34a; }
+  .tour-green .tour-cta:hover { background: #16a34a; color: white; }
+  .tour-purple .tour-cta { background: #ede9fe; color: #7c3aed; }
+  .tour-purple .tour-cta:hover { background: #7c3aed; color: white; }
+
+  .booking-section {
+    padding: 6rem 0;
+    background: var(--color-gray-100);
+  }
+
+  .booking-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: start;
+  }
+
+  .booking-info h2 {
+    font-size: 2.25rem;
+    font-weight: 800;
+    margin-bottom: 1rem;
+  }
+
+  .booking-info > p {
+    font-size: 1.05rem;
+    color: var(--color-gray-500);
+    line-height: 1.7;
+    margin-bottom: 2rem;
+  }
+
+  .info-cards {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+
+  .info-card {
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+    background: var(--color-white);
+    padding: 1.25rem;
+    border-radius: var(--radius-sm);
+    box-shadow: var(--shadow-sm);
+  }
+
+  .info-icon {
+    width: 44px;
+    height: 44px;
+    min-width: 44px;
+    background: #fef3c7;
+    color: #d97706;
+    border-radius: var(--radius-sm);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .info-card strong {
+    display: block;
+    font-size: 0.95rem;
+    margin-bottom: 0.15rem;
+  }
+
+  .info-card p {
+    font-size: 0.85rem;
+    color: var(--color-gray-500);
+  }
+
+  .booking-form-wrapper {
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  @media (max-width: 968px) {
+    .tours-hero-content h1 {
+      font-size: 2.25rem;
+    }
+
+    .booking-layout {
+      grid-template-columns: 1fr;
+      gap: 2.5rem;
+    }
+
+    .booking-form-wrapper {
+      justify-content: center;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .tours-hero-gallery {
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .hero-photo {
+      width: 100%;
+      max-width: 320px;
+      height: 180px;
+    }
+
+    .hero-photo:first-child,
+    .hero-photo:last-child {
+      transform: none;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .tours-hero {
+      padding: 8rem 1.5rem 3rem;
+    }
+
+    .tours-hero-content h1 {
+      font-size: 1.85rem;
+    }
+
+    .section-header h2,
+    .booking-info h2 {
+      font-size: 1.75rem;
+    }
+  }
+</style>

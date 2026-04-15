@@ -1,0 +1,478 @@
+---
+import Layout from '../layouts/Layout.astro';
+import BookingForm from '../components/BookingForm.astro';
+
+const WHATSAPP = '56922444508';
+---
+
+<Layout title="Transportes Frutillar - Transporte de Personas">
+  <section class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-content">
+      <div class="hero-text">
+        <span class="hero-badge">Servicio Confiable</span>
+        <h1>Tu transporte seguro en <span class="highlight">Frutillar</span></h1>
+        <p>Traslados puntuales y cómodos para moverte por Frutillar y toda la Región de Los Lagos. Reserva en segundos por WhatsApp.</p>
+        <div class="hero-features">
+          <div class="feature-item">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10"/><path d="m9 12 2 2 4-4"/></svg>
+            <span>Viajes seguros</span>
+          </div>
+          <div class="feature-item">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            <span>Puntuales siempre</span>
+          </div>
+          <div class="feature-item">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>
+            <span>Trato personalizado</span>
+          </div>
+        </div>
+        <a href="#reservar" class="hero-cta">
+          Reservar ahora
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" x2="19" y1="12" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+      </div>
+      <div class="hero-form">
+        <BookingForm type="transporte" whatsappNumber={WHATSAPP} />
+      </div>
+    </div>
+  </section>
+
+  <section class="services">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Nuestros Servicios</span>
+        <h2>¿Cómo te podemos ayudar?</h2>
+        <p>Ofrecemos soluciones de transporte adaptadas a tus necesidades</p>
+      </div>
+      <div class="services-grid">
+        <div class="service-card">
+          <div class="service-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M8 6v6"/><path d="M15 6v6"/><path d="M2 12h19.6"/><path d="M18 18h3s.5-1.7.8-2.8c.1-.4.2-.8.2-1.2 0-.4-.1-.8-.2-1.2l-1.4-5C20.1 6.8 19.1 6 18 6H4a2 2 0 0 0-2 2v10h3"/><circle cx="7" cy="18" r="2"/><path d="M9 18h5"/><circle cx="16" cy="18" r="2"/></svg>
+          </div>
+          <h3>Traslados Privados</h3>
+          <p>Servicio puerta a puerta con vehículos cómodos y conductores profesionales. Ideal para aeropuerto, terminal y destinos específicos.</p>
+        </div>
+        <div class="service-card">
+          <div class="service-icon accent">
+            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          </div>
+          <h3>Grupos y Eventos</h3>
+          <p>Transporte para grupos, eventos corporativos, bodas y celebraciones. Capacidad para grupos grandes con coordinación especial.</p>
+        </div>
+        <div class="service-card">
+          <div class="service-icon tour">
+            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+          </div>
+          <h3>Tours por Frutillar</h3>
+          <p>Descubre los encantos de Frutillar con nuestros tours guiados. Costanera, Teatro del Lago, miradores y más.</p>
+          <a href="/tours" class="service-link">
+            Ver tours disponibles
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" x2="19" y1="12" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="why-us">
+    <div class="container">
+      <div class="why-grid">
+        <div class="why-content">
+          <span class="section-tag">¿Por qué elegirnos?</span>
+          <h2>Más que un transporte, una experiencia</h2>
+          <ul class="why-list">
+            <li>
+              <div class="why-check">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              </div>
+              <div>
+                <strong>Conocemos la zona</strong>
+                <p>Años de experiencia recorriendo Frutillar y la Región de Los Lagos.</p>
+              </div>
+            </li>
+            <li>
+              <div class="why-check">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              </div>
+              <div>
+                <strong>Reserva fácil por WhatsApp</strong>
+                <p>Sin apps complicadas. Reserva en segundos directamente por WhatsApp.</p>
+              </div>
+            </li>
+            <li>
+              <div class="why-check">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              </div>
+              <div>
+                <strong>Precios justos y transparentes</strong>
+                <p>Tarifas claras sin sorpresas. Consulta antes de viajar.</p>
+              </div>
+            </li>
+            <li>
+              <div class="why-check">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              </div>
+              <div>
+                <strong>Disponibles todos los días</strong>
+                <p>Operamos los 7 días de la semana, incluidos festivos.</p>
+              </div>
+            </li>
+          </ul>
+        </div>
+        <div class="why-image">
+          <div class="image-gallery">
+            <img src="/fotos/pasajeros-1.webp" alt="Servicio de transporte de pasajeros en Frutillar" class="gallery-img gallery-img-main" />
+            <img src="/fotos/pasajeros-2.webp" alt="Transporte cómodo y seguro en Frutillar" class="gallery-img gallery-img-secondary" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    padding-top: 72px;
+    overflow: hidden;
+  }
+
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, #e8eef5 0%, #d6e4f0 40%, #dce8f2 100%);
+    z-index: 0;
+  }
+
+  .hero-bg::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 120px;
+    background: linear-gradient(to bottom, transparent, var(--color-white));
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 1;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 3rem 1.5rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+    width: 100%;
+  }
+
+  .hero-badge {
+    display: inline-block;
+    background: var(--color-primary-light);
+    color: var(--color-primary);
+    padding: 0.35rem 1rem;
+    border-radius: 9999px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+  }
+
+  .hero-text h1 {
+    font-size: 3.25rem;
+    font-weight: 800;
+    line-height: 1.15;
+    margin-bottom: 1.25rem;
+    color: var(--color-dark);
+  }
+
+  .highlight {
+    color: var(--color-primary);
+  }
+
+  .hero-text > p {
+    font-size: 1.15rem;
+    color: var(--color-gray-500);
+    line-height: 1.7;
+    margin-bottom: 2rem;
+    max-width: 480px;
+  }
+
+  .hero-features {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.25rem;
+    margin-bottom: 2rem;
+  }
+
+  .feature-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--color-gray-700);
+  }
+
+  .feature-item svg {
+    color: var(--color-accent);
+  }
+
+  .hero-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.85rem 2rem;
+    background: var(--color-primary);
+    color: var(--color-white);
+    border-radius: 9999px;
+    font-weight: 600;
+    font-size: 1rem;
+    transition: background 0.2s, transform 0.15s;
+  }
+
+  .hero-cta:hover {
+    background: var(--color-primary-dark);
+    transform: translateY(-1px);
+  }
+
+  .hero-form {
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  .services {
+    padding: 6rem 0;
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+  }
+
+  .section-header {
+    text-align: center;
+    margin-bottom: 3.5rem;
+  }
+
+  .section-tag {
+    display: inline-block;
+    background: var(--color-primary-light);
+    color: var(--color-primary);
+    padding: 0.3rem 0.9rem;
+    border-radius: 9999px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 1rem;
+  }
+
+  .section-header h2 {
+    font-size: 2.25rem;
+    font-weight: 800;
+    margin-bottom: 0.75rem;
+  }
+
+  .section-header p {
+    font-size: 1.1rem;
+    color: var(--color-gray-500);
+  }
+
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+  }
+
+  .service-card {
+    background: var(--color-white);
+    border: 1px solid var(--color-gray-100);
+    border-radius: var(--radius);
+    padding: 2rem;
+    transition: box-shadow 0.3s, transform 0.2s;
+  }
+
+  .service-card:hover {
+    box-shadow: var(--shadow-lg);
+    transform: translateY(-4px);
+  }
+
+  .service-icon {
+    width: 56px;
+    height: 56px;
+    background: var(--color-primary-light);
+    color: var(--color-primary);
+    border-radius: var(--radius-sm);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1.25rem;
+  }
+
+  .service-icon.accent {
+    background: var(--color-accent-light);
+    color: var(--color-accent);
+  }
+
+  .service-icon.tour {
+    background: #fef3c7;
+    color: #d97706;
+  }
+
+  .service-card h3 {
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+  }
+
+  .service-card p {
+    font-size: 0.92rem;
+    color: var(--color-gray-500);
+    line-height: 1.6;
+  }
+
+  .service-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    margin-top: 1rem;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--color-primary);
+    transition: gap 0.2s;
+  }
+
+  .service-link:hover {
+    gap: 0.7rem;
+  }
+
+  .why-us {
+    padding: 6rem 0;
+    background: var(--color-gray-100);
+  }
+
+  .why-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+  }
+
+  .why-content h2 {
+    font-size: 2.25rem;
+    font-weight: 800;
+    margin-bottom: 2rem;
+  }
+
+  .why-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .why-list li {
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+  }
+
+  .why-check {
+    width: 28px;
+    height: 28px;
+    min-width: 28px;
+    background: var(--color-accent-light);
+    color: var(--color-accent);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 2px;
+  }
+
+  .why-list strong {
+    display: block;
+    font-size: 1rem;
+    margin-bottom: 0.2rem;
+  }
+
+  .why-list p {
+    font-size: 0.9rem;
+    color: var(--color-gray-500);
+  }
+
+  .image-gallery {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    height: 400px;
+  }
+
+  .gallery-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-md);
+  }
+
+  .gallery-img-main {
+    grid-row: 1 / 2;
+  }
+
+  .gallery-img-secondary {
+    grid-row: 1 / 2;
+  }
+
+  @media (max-width: 968px) {
+    .hero-content {
+      grid-template-columns: 1fr;
+      gap: 2.5rem;
+      padding-top: 2rem;
+    }
+
+    .hero-text h1 {
+      font-size: 2.5rem;
+    }
+
+    .hero-form {
+      justify-content: center;
+    }
+
+    .services-grid {
+      grid-template-columns: 1fr;
+      max-width: 480px;
+      margin: 0 auto;
+    }
+
+    .why-grid {
+      grid-template-columns: 1fr;
+      gap: 2.5rem;
+    }
+
+    .why-image {
+      order: -1;
+    }
+
+    .image-gallery {
+      height: 250px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .hero-text h1 {
+      font-size: 2rem;
+    }
+
+    .section-header h2,
+    .why-content h2 {
+      font-size: 1.75rem;
+    }
+  }
+</style>
