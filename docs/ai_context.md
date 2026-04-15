@@ -12,7 +12,7 @@ Crear sitio web en Astro para Transportes Frutillar (transporte de personas + to
 - **Página Tours:** 5 tours predefinidos por Frutillar con formulario de reserva
 - **Formulario WhatsApp:** Ambas páginas envían datos (origen, destino, fecha, hora, pasajeros, nombre) pre-rellenados a WhatsApp vía `wa.me`
 - **Google Maps Autocomplete:** Integrado como mejora progresiva (funciona sin API key, con API key agrega autocompletado de direcciones restringido a Chile)
-- **Número WhatsApp:** `56922444508` (+56 9 2244 4508)
+- **Número WhatsApp:** `56988979094` (+56 9 2244 4508)
 - **Fecha mínima:** Los inputs de fecha no permiten seleccionar fechas pasadas
 
 ### Archivos tocados
