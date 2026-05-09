@@ -288,6 +288,10 @@ const isTransport = type === 'transporte';
           }
         });
       });
+
+      if (typeof (window as any).__initAutocompleteForSimulator === 'function') {
+        (window as any).__initAutocompleteForSimulator();
+      }
     };
   }
 
