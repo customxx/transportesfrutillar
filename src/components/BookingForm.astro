@@ -36,6 +36,7 @@ const isTransport = type === 'transporte';
         required
         autocomplete="off"
       />
+      <input type="hidden" name="origin_coords" data-address="" />
     </div>
 
     {isTransport && (
@@ -53,6 +54,7 @@ const isTransport = type === 'transporte';
           required
           autocomplete="off"
         />
+        <input type="hidden" name="destination_coords" data-address="" />
       </div>
     )}
 
@@ -123,9 +125,61 @@ const isTransport = type === 'transporte';
 </div>
 
 <script>
-  function initForms() {
+  const TARIFA_POR_KM = 950;
+  const FACTOR_CORRECCION = 1.3;
+
+  function haversineDistance(lat1: number, lng1: number, lat2: number, lng2: number): number {
+    const R = 6371;
+    const dLat = ((lat2 - lat1) * Math.PI) / 180;
+    const dLng = ((lng2 - lng1) * Math.PI) / 180;
+    const a =
+      Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+      Math.cos((lat1 * Math.PI) / 180) *
+        Math.cos((lat2 * Math.PI) / 180) *
+        Math.sin(dLng / 2) *
+        Math.sin(dLng / 2);
+    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+    return R * c;
+  }
+
+  async function geocodeAddress(address: string): Promise<{ lat: number; lng: number } | null> {
+    const cacheKey = `geo_${address}`;
+    const cached = sessionStorage.getItem(cacheKey);
+    if (cached) {
+      try {
+        return JSON.parse(cached);
+      } catch {
+        sessionStorage.removeItem(cacheKey);
+      }
+    }
+    const apiKey = (window as any).__googleMapsApiKey;
+    if (!apiKey) return null;
+    try {
+      const res = await fetch(
+        `https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(address)}&key=${apiKey}`
+      );
+      const data = await res.json();
+      if (data.results?.[0]?.geometry?.location) {
+        const coords = data.results[0].geometry.location;
+        sessionStorage.setItem(cacheKey, JSON.stringify(coords));
+        return coords;
+      }
+    } catch {}
+    return null;
+  }
+
+  function parseCoords(coordsJson: string | null): { lat: number; lng: number } | null {
+    if (!coordsJson) return null;
+    try {
+      const parsed = JSON.parse(coordsJson);
+      if (parsed.lat != null && parsed.lng != null) return parsed;
+    } catch {}
+    return null;
+  }
+
+  async function initForms() {
     document.querySelectorAll<HTMLFormElement>('.booking-form').forEach((form) => {
-      form.addEventListener('submit', (e) => {
+      form.addEventListener('submit', async (e) => {
         e.preventDefault();
 
         const formData = new FormData(form);
@@ -138,30 +192,62 @@ const isTransport = type === 'transporte';
         const time = formData.get('time') as string;
         const passengers = formData.get('passengers') as string;
 
-        let message = '';
-
         if (type === 'transporte') {
           const destination = formData.get('destination') as string;
-          message = `Hola! Quiero reservar un *transporte*:\n\n`
+          const originCoordsField = form.querySelector<HTMLInputElement>('input[name="origin_coords"]');
+          const destCoordsField = form.querySelector<HTMLInputElement>('input[name="destination_coords"]');
+
+          const originCoords = parseCoords(originCoordsField?.value ?? null);
+          const destCoords = parseCoords(destCoordsField?.value ?? null);
+
+          let originLatLng = originCoords;
+          let destLatLng = destCoords;
+
+          if (!originLatLng) originLatLng = await geocodeAddress(origin);
+          if (!destLatLng) destLatLng = await geocodeAddress(destination);
+
+          let distanciaKm: number | null = null;
+          let precioEstimado: number | null = null;
+
+          if (originLatLng && destLatLng) {
+            const raw = haversineDistance(
+              originLatLng.lat,
+              originLatLng.lng,
+              destLatLng.lat,
+              destLatLng.lng
+            );
+            distanciaKm = Math.round(raw * FACTOR_CORRECCION * 10) / 10;
+            precioEstimado = Math.round(distanciaKm * TARIFA_POR_KM);
+          }
+
+          let message = `Hola! Quiero reservar un *transporte*:\n\n`
             + `*Nombre:* ${name}\n`
             + `*Desde:* ${origin}\n`
             + `*Hasta:* ${destination}\n`
             + `*Fecha:* ${date}\n`
             + `*Hora:* ${time}\n`
             + `*Pasajeros:* ${passengers}`;
+
+          if (distanciaKm !== null && precioEstimado !== null) {
+            message += `\n*Distancia estimada:* ~${distanciaKm} km\n`
+                     + `*Tarifa estimada:* $${precioEstimado.toLocaleString('es-CL')} pesos`;
+          }
+
+          const url = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
+          window.open(url, '_blank');
         } else {
           const tour = formData.get('tour') as string;
-          message = `Hola! Quiero reservar un *tour*:\n\n`
+          const message = `Hola! Quiero reservar un *tour*:\n\n`
             + `*Nombre:* ${name}\n`
             + `*Tour:* ${tour}\n`
             + `*Punto de encuentro:* ${origin}\n`
             + `*Fecha:* ${date}\n`
             + `*Hora:* ${time}\n`
             + `*Pasajeros:* ${passengers}`;
-        }
 
-        const url = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
-        window.open(url, '_blank');
+          const url = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
+          window.open(url, '_blank');
+        }
       });
     });
   }
@@ -169,6 +255,8 @@ const isTransport = type === 'transporte';
   function loadGoogleMaps() {
     const apiKey = import.meta.env.PUBLIC_GOOGLE_MAPS_API_KEY;
     if (!apiKey) return;
+
+    (window as any).__googleMapsApiKey = apiKey;
 
     const script = document.createElement('script');
     script.src = `https://maps.googleapis.com/maps/api/js?key=${apiKey}&libraries=places&callback=initAutocomplete`;
@@ -178,14 +266,25 @@ const isTransport = type === 'transporte';
 
     (window as any).initAutocomplete = () => {
       document.querySelectorAll<HTMLInputElement>('.address-input').forEach((input) => {
+        // @ts-ignore - google is loaded from Google Maps API
         const autocomplete = new google.maps.places.Autocomplete(input, {
           componentRestrictions: { country: 'cl' },
-          fields: ['formatted_address'],
+          fields: ['formatted_address', 'geometry'],
         });
         autocomplete.addListener('place_changed', () => {
           const place = autocomplete.getPlace();
           if (place.formatted_address) {
             input.value = place.formatted_address;
+          }
+          if (place.geometry?.location) {
+            const coordsField = input.closest('.form-group')?.querySelector<HTMLInputElement>('input[type="hidden"]');
+            if (coordsField) {
+              coordsField.setAttribute('data-address', place.formatted_address || '');
+              coordsField.value = JSON.stringify({
+                lat: place.geometry.location.lat(),
+                lng: place.geometry.location.lng(),
+              });
+            }
           }
         });
       });

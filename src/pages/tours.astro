@@ -6,38 +6,43 @@ const WHATSAPP = '56988979094';
 
 const tours = [
   {
-    name: 'Frutillar Bajo - Centro Histórico',
-    duration: '2 horas',
-    description: 'Recorre las calles del pueblo original con su arquitectura colonial alemana, museos y casas patrimoniales.',
-    highlights: ['Museo Colonial Alemán', 'Casas patrimoniales', 'Iglesia Luterana'],
+    name: 'Tour Full Day Cochamó',
+    duration: '08:30 – 17:00',
+    price: '$40.000 por persona',
+    description: 'Un día completo explorando Cochamó: caminata por el pueblo, vista al estuario, tiempo libre y retorno cómodo.',
+    highlights: ['Transporte ida y vuelta', 'Conductor/guía', 'Paradas turísticas', 'Tiempo libre para recorrer'],
     color: 'blue',
   },
   {
-    name: 'Costanera y Lago Llanquihue',
-    duration: '1.5 horas',
-    description: 'Paseo por la icónica costanera con vistas al volcán Osorno y el lago Llanquihue.',
-    highlights: ['Playa de Frutillar', 'Muelle histórico', 'Vista al Volcán Osorno'],
+    name: 'Tour Full Day Ensenada + Saltos del Petrohué + Lago Todos los Santos',
+    duration: '08:30 – 17:00',
+    price: '$35.000 por persona',
+    description: 'Recorre las pasarelas, observa las cascadas del Petrohué y disfruta la orilla del lago Todos los Santos con vista al volcán Osorno.',
+    highlights: ['Saltos del Petrohué', 'Lago Todos los Santos', 'Conductor/guía', 'Paradas turísticas'],
     color: 'teal',
   },
   {
-    name: 'Teatro del Lago y alrededores',
-    duration: '2 horas',
-    description: 'Visita el emblemático Teatro del Lago y conoce la historia cultural de Frutillar.',
-    highlights: ['Teatro del Lago', 'Jardines costeros', 'Zona gastronómica'],
+    name: 'Tour Chiloé',
+    duration: '08:30 – 19:00',
+    price: '$50.000 por persona',
+    description: 'Cruce en ferry por el canal de Chacao, visita Ancud, Dalcahue y Castro con sus palafitos e iglesia patrimonial.',
+    highlights: ['Cruce en ferry Canal de Chacao', 'Ancud, Dalcahue y Castro', 'Palafitos de Gamboa', 'Guía/conductor'],
     color: 'amber',
   },
   {
-    name: 'Frutillar Alto - Miradores',
-    duration: '1.5 horas',
-    description: 'Sube a los miradores de Frutillar Alto para disfrutar vistas panorámicas impresionantes.',
-    highlights: ['Mirador Volcán Osorno', 'Vista panorámica', 'Barrio Alto'],
+    name: 'Tour Frutillar + Puerto Octay',
+    duration: '09:00 – 17:30',
+    price: '$25.000 por persona',
+    description: 'Museo Colonial Alemán, Teatro del Lago, costanera de Frutillar y ruta escénica hasta Puerto Octay con mirador Centinela.',
+    highlights: ['Museo Colonial Alemán', 'Teatro del Lago', 'Puerto Octay y Sector Centinela', 'Guía/conductor'],
     color: 'green',
   },
   {
-    name: 'Tour Completo Frutillar',
-    duration: '4 horas',
-    description: 'El tour más completo: recorre Frutillar de punta a punta, combinando todos nuestros circuitos.',
-    highlights: ['Todo incluido', 'Paradas fotográficas', 'Guía personalizado'],
+    name: 'Tour Full Day Termas del Sol',
+    duration: '08:30 – 18:30',
+    price: '$75.000 por persona (incluye entrada)',
+    description: 'Día completo en las termas naturales de Cochamó, con ruta escénica, tiempo libre en las piscinas y retorno al punto de origen.',
+    highlights: ['Entrada a Termas del Sol incluida', 'Ruta escénica Cordillera', '3 horas libres en termas', 'Transporte y guía'],
     color: 'purple',
   },
 ];
@@ -72,6 +77,7 @@ const tours = [
         {tours.map((tour) => (
           <div class={`tour-card tour-${tour.color}`}>
             <div class="tour-badge">{tour.duration}</div>
+            <div class="tour-price">{tour.price}</div>
             <h3>{tour.name}</h3>
             <p>{tour.description}</p>
             <ul class="tour-highlights">
@@ -307,7 +313,15 @@ const tours = [
     border-radius: 9999px;
     font-size: 0.8rem;
     font-weight: 600;
-    margin-bottom: 1rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .tour-price {
+    display: inline-block;
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: var(--color-gray-700);
+    margin-bottom: 0.5rem;
   }
 
   .tour-blue .tour-badge { background: var(--color-primary-light); color: var(--color-primary); }
