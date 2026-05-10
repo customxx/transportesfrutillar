@@ -83,8 +83,16 @@ const WHATSAPP = '56988979094';
     </div>
   </section>
 
-  <section class="tarifa-section">
+  <section class="tarifa-section" id="tarifa">
     <div class="container">
+      <div class="tarifa-header">
+        <div class="tarifa-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+        </div>
+        <span class="section-tag">Calcula tu viaje</span>
+        <h2>Simulador de Tarifa</h2>
+        <p>Obtén una estimación del costo de tu viaje en segundos. Ingresa tu origen y destino para ver el precio aproximado.</p>
+      </div>
       <TarifaSimulator />
     </div>
   </section>
@@ -397,13 +405,73 @@ const WHATSAPP = '56988979094';
   }
 
   .tarifa-section {
-    padding: 3rem 0;
+    padding: 8rem 0;
+    position: relative;
+    background: linear-gradient(180deg, var(--color-gray-100) 0%, var(--color-white) 100%);
+  }
+
+  .tarifa-section::before {
+    content: '';
+    position: absolute;
+    top: -4rem;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(to right, transparent, var(--color-gray-300), transparent);
+  }
+
+  .tarifa-section::after {
+    content: '';
+    position: absolute;
+    top: -3rem;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 1px;
+    height: 3rem;
+    background: linear-gradient(to bottom, transparent, var(--color-gray-300));
+  }
+
+  .tarifa-header {
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+
+  .tarifa-icon {
+    width: 64px;
+    height: 64px;
+    background: var(--color-primary);
+    color: var(--color-white);
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1.25rem;
+    box-shadow: 0 8px 24px rgba(10, 25, 44, 0.2);
+  }
+
+  .tarifa-header .section-tag {
+    margin-bottom: 0.75rem;
+  }
+
+  .tarifa-header h2 {
+    font-size: 2.25rem;
+    font-weight: 800;
+    margin-bottom: 0.75rem;
+    color: var(--color-dark);
+  }
+
+  .tarifa-header p {
+    font-size: 1.1rem;
+    color: var(--color-gray-500);
+    max-width: 480px;
+    margin: 0 auto;
+    line-height: 1.7;
   }
 
   .tarifa-section .container {
-    max-width: 540px;
+    max-width: 640px;
     margin: 0 auto;
-    padding: 0 1rem;
+    padding: 0 1.5rem;
   }
 
   .why-grid {

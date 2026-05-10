@@ -33,6 +33,7 @@ const currentPath = Astro.url.pathname;
         <ul class="nav-links" id="navLinks">
           <li><a href="/" class:list={[{ active: currentPath === '/' }]}>Transporte</a></li>
           <li><a href="/tours" class:list={[{ active: currentPath === '/tours' || currentPath === '/tours/' }]}>Tours</a></li>
+          <li><a href="#tarifa" class="nav-price">Precios</a></li>
         </ul>
       </div>
     </nav>
@@ -198,6 +199,20 @@ const currentPath = Astro.url.pathname;
       .nav-links a.active {
         background: var(--color-primary);
         color: var(--color-white);
+      }
+
+      .nav-price {
+        padding: 0.5rem 1.25rem;
+        border-radius: 9999px;
+        font-weight: 500;
+        font-size: 0.95rem;
+        color: var(--color-accent);
+        transition: all 0.2s;
+      }
+
+      .nav-price:hover {
+        background: var(--color-accent-light);
+        color: var(--color-accent);
       }
 
       .nav-toggle {
